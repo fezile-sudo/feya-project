@@ -1,9 +1,22 @@
-.header {
-  height: 70px;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
-  border-bottom: 1px solid #ddd;
+.header{
+     background:white;
+     display:flex;
+     justify-content:space-between;
+     align-items:center;
+     padding:20px 30px;
+     box-shadow:0 3px 12px rgba(0,0,0,.05);
+
+}
+
+.avatar{
+     width:45px;
+     height:45px;
+     border-radius:50%;
+     background:#2563eb;
+     display:flex;
+     align-items:center;
+     justify-content:center;
+     color:white;
+     font-weight:bold;
+
 }

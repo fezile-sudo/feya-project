@@ -1,0 +1,30 @@
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card-color{
+    width:8px;
+    height:70px;
+    border-radius:8px;
+}
+
+.card-content h4{
+    color:#777;
+    font-weight:500;
+}
+
+.card-content h2{
+    margin-top:8px;
+    font-size:30px;
+}

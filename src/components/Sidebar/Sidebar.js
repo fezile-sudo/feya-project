@@ -1,59 +1,59 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-    FaHome,
-    FaProjectDiagram,
-    FaTasks,
-    FaCalendarAlt,
-    FaChartBar,
-    FaCog
-} from "react-icons/fa";
-
+import { FaBars, FaHome, FaTasks, FaCog, FaChartBar, FaCalendarAlt, FaProjectDiagram} from "react-icons/fa";
 import "./Sidebar.css";
 
 function Sidebar() {
-    return (
-        <aside className="sidebar">
 
-            <h2 className="logo">
-                ProjectPro
-            </h2>
+    const [collapsed, setCollapsed] = useState(false);
+
+    return (
+        <aside className={collapsed ? "sidebar collapsed" : "sidebar"}>
+
+            <button className="menu-btn" onClick={() => setCollapsed(!collapsed)}>
+                <FaBars />
+            </button>
+
+            <h2>{collapsed ? "PM" : "ProjectPro"}</h2>
 
             <nav>
 
                 <NavLink to="/">
                     <FaHome />
-                    Dashboard
+                    {!collapsed && "Dashboard"}
                 </NavLink>
 
                 <NavLink to="/projects">
                     <FaProjectDiagram />
-                    Projects
+                    {!collapsed && "Projects"}
                 </NavLink>
 
                 <NavLink to="/tasks">
                     <FaTasks />
-                    Tasks
+                    {!collapsed && "Tasks"}
                 </NavLink>
 
                 <NavLink to="/calendar">
                     <FaCalendarAlt />
-                    Calendar
+                    {!collapsed && "Calendar"}
                 </NavLink>
 
                 <NavLink to="/reports">
                     <FaChartBar />
-                    Reports
+                    {!collapsed && "Reports"}
                 </NavLink>
 
                 <NavLink to="/settings">
                     <FaCog />
-                    Settings
+                    {!collapsed && "Settings"}
                 </NavLink>
 
             </nav>
 
         </aside>
+
     );
+
 }
 
 export default Sidebar;
