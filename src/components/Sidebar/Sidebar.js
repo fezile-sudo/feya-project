@@ -14,7 +14,7 @@ function Sidebar() {
                 <FaBars />
             </button>
 
-            <h2>{collapsed ? "PM" : "ProjectPro"}</h2>
+            <h2>{collapsed ? "PM" : "feyaProject"}</h2>
 
             <nav>
 

@@ -1,0 +1,37 @@
+.projects-page {
+    padding: 30px;
+}
+
+.projects-page h1 {
+    margin-bottom: 25px;
+}
+
+
+.projects-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    gap:20px;
+}
+
+.project-controls {
+
+    display:flex;
+    gap:15px;
+    margin:25px 0;
+
+}
+
+
+.project-controls input,
+.project-controls select {
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
+
+}
+
+.project-controls input {
+    flex:1;
+
+}

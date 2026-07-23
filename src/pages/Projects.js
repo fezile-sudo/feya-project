@@ -1,67 +1,107 @@
 import { useState } from "react";
 import { useProjects } from "../context/ProjectContext";
 
+import ProjectForm from "../components/Project/ProjectForm";
+import ProjectCard from "../components/Project/ProjectCard";
+import ProjectStats from "../components/Project/ProjectStats";
+
+import "./Projects.css";
+
+
 function Projects() {
 
-    const { projects, addProject, deleteProject } = useProjects();
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const {projects, addProject, deleteProject, updateProject} = useProjects();
 
-        if (!title.trim()) return;
+    const [editingProject, setEditingProject] = useState(null);
 
-        addProject({
-            id: Date.now(),
-            title,
-            description,
-            status: "Active",
-            createdAt: new Date().toISOString()
-        });
+    const [searchTerm, setSearchTerm] = useState("");
 
-        setTitle("");
-        setDescription("");
+    const [filterStatus, setFilterStatus] = useState("All");
+
+    const handleSubmit = (projectData) => {
+        if (editingProject) {
+            updateProject(projectData);
+            setEditingProject(null);
+
+        } else {
+
+            addProject(projectData);
+
+        }
+
     };
 
-    return (
-        <div>
 
+    const filteredProjects = projects.filter((project) => {
+
+    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesStatus = filterStatus === "All" || project.status === filterStatus;
+
+
+    return matchesSearch && matchesStatus;
+
+});
+
+
+
+    return (
+
+        <div className="projects-page">
             <h1>Projects</h1>
 
-            <form onSubmit={handleSubmit} className="project-form">
+             <ProjectStats />
 
-                <input placeholder="Project name" value={title} onChange={(e) => setTitle(e.target.value)}/>
+        <div className="project-controls">
+            <input type="text" placeholder="Search projects..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
 
-                <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+            <option value="All">
+                All Projects
+            </option>
 
-                <button>Add Project</button>
+            <option value="Planning">
+                Planning
+            </option>
 
-            </form>
+            <option value="Active">
+                Active
+            </option>
 
-            <div className="projects-grid">
+            <option value="Completed">
+                Completed
+            </option>
 
-                {projects.map(project => (
+            <option value="On Hold">
+                On Hold
+            </option>
 
-                    <div className="project-card" key={project.id}>
+    </select>
 
-                        <h2>{project.title}</h2>
+</div>
 
-                        <p>{project.description}</p>
+        <ProjectForm onSubmit={handleSubmit} project={editingProject} onCancel={() => setEditingProject(null)}/>
 
-                        <small>{project.status}</small>
+        <div className="projects-grid">
+                    {projects.length === 0 ? (
 
-                        <button onClick={() => deleteProject(project.id)} className="delete-btn">
-                            Delete
-                        </button>
-
+                    <div className="empty-state">
+                        <h3>No projects yet</h3>
+                        <p>Create your first project to get started.</p>
                     </div>
 
-                ))}
+                ) : (
 
+                    filteredProjects.map(project => (
+                        <ProjectCard key={project.id} project={project} onDelete={deleteProject} onEdit={setEditingProject}/>
+
+                    ))
+
+                )}
             </div>
-
         </div>
-    );
+   );
 }
+
 
 export default Projects;

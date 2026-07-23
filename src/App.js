@@ -6,6 +6,8 @@ import Tasks from "./pages/Tasks";
 import Calendar from "./pages/Calendar";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import ProjectDetails from "./pages/ProjectDetails";
+
 
 function App() {
     return (
@@ -26,6 +28,9 @@ function App() {
                     <Route path="/reports" element={<Reports />} />
 
                     <Route path="/settings" element={<Settings />} />
+
+                    <Route path="/projects/:id" element={<ProjectDetails />} />
+
 
                 </Routes>
 

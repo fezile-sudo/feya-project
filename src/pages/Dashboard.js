@@ -11,7 +11,7 @@ function Dashboard() {
     year: "numeric",
   });
 
-  // Dashboard statistics
+  
   const totalProjects = projects.length;
   const activeProjects = projects.filter((project) => project.status === "Active" ).length;
   const completedProjects = projects.filter((project) => project.status === "Completed").length;

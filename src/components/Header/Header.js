@@ -15,7 +15,7 @@ function Header() {
             </div>
 
             <div className="avatar">
-                JM
+                FG
             </div>
 
         </header>

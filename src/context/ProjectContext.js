@@ -9,21 +9,23 @@ export function ProjectProvider({ children }) {
         return saved ? JSON.parse(saved) : [];
     });
 
-    useEffect(() => {
-        localStorage.setItem("projects", JSON.stringify(projects));
-    }, [projects]);
+    useEffect(() => {localStorage.setItem("projects", JSON.stringify(projects));}, [projects]);
 
-    const addProject = (project) => {
-        setProjects(prev => [...prev, project]);
-    };
+    const addProject = (project) => { setProjects(prev => [...prev, project]);};
 
-    const deleteProject = (id) => {
-        setProjects(prev => prev.filter(project => project.id !== id)
+    const deleteProject = (id) => {setProjects(prev => prev.filter(project => project.id !== id));};
+
+    const updateProject = (updatedProject) => {
+        setProjects(prev => prev.map(project => project.id === updatedProject.id
+                    ? updatedProject
+                    : project
+            )
         );
     };
 
     return (
-        <ProjectContext.Provider value={{projects, addProject, deleteProject }}>
+        <ProjectContext.Provider
+            value={{ projects, addProject, deleteProject, updateProject }} >
             {children}
         </ProjectContext.Provider>
     );
