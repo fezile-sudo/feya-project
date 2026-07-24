@@ -14,39 +14,21 @@ function Sidebar() {
                 <FaBars />
             </button>
 
-            <h2>{collapsed ? "PM" : "feyaProject"}</h2>
+            <h2>{collapsed ? "FP" : "feyaPlan"}</h2>
 
             <nav>
 
-                <NavLink to="/">
-                    <FaHome />
-                    {!collapsed && "Dashboard"}
-                </NavLink>
+                <NavLink to="/"><FaHome />{!collapsed && "Dashboard"}</NavLink>
 
-                <NavLink to="/projects">
-                    <FaProjectDiagram />
-                    {!collapsed && "Projects"}
-                </NavLink>
+                <NavLink to="/projects"><FaProjectDiagram />{!collapsed && "Projects"}</NavLink>
 
-                <NavLink to="/tasks">
-                    <FaTasks />
-                    {!collapsed && "Tasks"}
-                </NavLink>
+                <NavLink to="/tasks"><FaTasks />{!collapsed && "Tasks"}</NavLink>
 
-                <NavLink to="/calendar">
-                    <FaCalendarAlt />
-                    {!collapsed && "Calendar"}
-                </NavLink>
+                <NavLink to="/calendar"><FaCalendarAlt />{!collapsed && "Calendar"}</NavLink>
 
-                <NavLink to="/reports">
-                    <FaChartBar />
-                    {!collapsed && "Reports"}
-                </NavLink>
+                <NavLink to="/reports"><FaChartBar />{!collapsed && "Reports"}</NavLink>
 
-                <NavLink to="/settings">
-                    <FaCog />
-                    {!collapsed && "Settings"}
-                </NavLink>
+                <NavLink to="/settings"><FaCog />{!collapsed && "Settings"}</NavLink>
 
             </nav>
 

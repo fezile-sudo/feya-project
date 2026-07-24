@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 import { useNavigate } from "react-router-dom";
+import ProjectTasks from "../components/Project/ProjectTasks";
 
 
 function ProjectDetails() {
@@ -26,34 +27,48 @@ function ProjectDetails() {
     }
 
 
-    return (
-        <div>
-            <button
-                className="view-btn" onClick={() => navigate("/projects")}>
-                ← Back to Projects
-            </button>
-            <h1>{project.title}</h1>
-            <p>
-                {project.description}
-            </p>
-            <div className="project-card">
+return (
+    <div>
+
+        <button
+            className="view-btn"
+            onClick={() => navigate("/projects")}
+        >
+            ← Back to Projects
+        </button>
+
+        <h1>{project.title}</h1>
+
+        <p>
+            {project.description}
+        </p>
+
+
+        <div className="project-card">
+
             <p>
                 <strong>Status:</strong> {project.status}
             </p>
+
             <p>
                 <strong>Priority:</strong> {project.priority}
             </p>
+
             <p>
                 <strong>Progress:</strong> {project.progress}%
             </p>
+
             <p>
                 <strong>Due Date:</strong> {project.dueDate || "Not set"}
             </p>
 
-    </div>
-</div>
+        </div>
 
-    );
+
+        <ProjectTasks projectId={project.id} />
+
+    </div>
+);
 
 }
 
