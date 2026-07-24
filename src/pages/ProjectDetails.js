@@ -12,7 +12,6 @@ function ProjectDetails() {
 
     const navigate = useNavigate();
 
-
     const project = projects.find( project => project.id === Number(id));
 
 
@@ -23,50 +22,30 @@ function ProjectDetails() {
                 <h2>Project not found</h2>
             </div>
         );
-
     }
 
 
 return (
     <div>
 
-        <button
-            className="view-btn"
-            onClick={() => navigate("/projects")}
-        >
-            ← Back to Projects
-        </button>
+        <button className="view-btn" onClick={() => navigate("/projects")}> ← Back to Projects</button>
 
         <h1>{project.title}</h1>
 
-        <p>
-            {project.description}
-        </p>
+        <p>{project.description}</p>
 
+    <div className="project-card">
 
-        <div className="project-card">
+        <p><strong>Status:</strong> {project.status}</p>
 
-            <p>
-                <strong>Status:</strong> {project.status}
-            </p>
+        <p><strong>Priority:</strong> {project.priority}</p>
 
-            <p>
-                <strong>Priority:</strong> {project.priority}
-            </p>
+        <p><strong>Progress:</strong> {project.progress}%</p>
 
-            <p>
-                <strong>Progress:</strong> {project.progress}%
-            </p>
+        <p><strong>Due Date:</strong> {project.dueDate || "Not set"}</p>
 
-            <p>
-                <strong>Due Date:</strong> {project.dueDate || "Not set"}
-            </p>
-
-        </div>
-
-
+    </div>
         <ProjectTasks projectId={project.id} />
-
     </div>
 );
 

@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useProjects } from "../context/ProjectContext";
-
 import ProjectForm from "../components/Project/ProjectForm";
 import ProjectCard from "../components/Project/ProjectCard";
 import ProjectStats from "../components/Project/ProjectStats";
-
 import "./Projects.css";
 
 
@@ -44,7 +42,6 @@ function Projects() {
 });
 
 
-
     return (
 
         <div className="projects-page">
@@ -56,25 +53,15 @@ function Projects() {
             <input type="text" placeholder="Search projects..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
 
-            <option value="All">
-                All Projects
-            </option>
+            <option value="All">All Projects</option>
 
-            <option value="Planning">
-                Planning
-            </option>
+            <option value="Planning">Planning</option>
 
-            <option value="Active">
-                Active
-            </option>
+            <option value="Active">Active</option>
 
-            <option value="Completed">
-                Completed
-            </option>
+            <option value="Completed">Completed</option>
 
-            <option value="On Hold">
-                On Hold
-            </option>
+            <option value="On Hold">On Hold</option>
 
     </select>
 
