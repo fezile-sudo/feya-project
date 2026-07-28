@@ -22,6 +22,7 @@ export function ProjectProvider({ children }) {
             )
         );
     };
+    
 
     return (
         <ProjectContext.Provider

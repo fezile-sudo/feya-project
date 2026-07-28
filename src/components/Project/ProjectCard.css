@@ -1,5 +1,5 @@
 .project-card {
-    background: #fff;
+    background: whitesmoke;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,.08);
@@ -38,6 +38,11 @@
 }
 
 .status.completed{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status.onhold{
     background:#dcfce7;
     color:#15803d;
 }

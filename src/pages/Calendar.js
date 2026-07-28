@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -31,20 +30,12 @@ function Calendar() {
     const handleEventClick = (info) => {
 
     const task = tasks.find(task => task.id.toString() === info.event.id );
-
-        setSelectedTask(task);
+                setSelectedTask(task);
 
     };
 
     // Save edited task
-    const handleEditSubmit = (updatedTask) => {
-
-        updateTask(updatedTask);
-
-        setEditingTask(null);
-
-    };
-
+    const handleEditSubmit = (updatedTask) => { updateTask(updatedTask); setEditingTask(null);};
 
     const handleEventDrop = (info) => {
 

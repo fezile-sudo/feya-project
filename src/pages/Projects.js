@@ -79,12 +79,8 @@ function Projects() {
 
                 ) : (
 
-                    filteredProjects.map(project => (
-                        <ProjectCard key={project.id} project={project} onDelete={deleteProject} onEdit={setEditingProject}/>
-
-                    ))
-
-                )}
+                    filteredProjects.map(project => (<ProjectCard key={project.id} project={project} onDelete={deleteProject} onEdit={setEditingProject}/>))
+                    )}
             </div>
         </div>
    );

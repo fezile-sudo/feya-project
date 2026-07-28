@@ -1,5 +1,5 @@
 .task-card {
-    background: white;
+    background: whitesmoke;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -33,7 +33,6 @@
 .priority.high {
     background: #ef4444;
 }
-
 
 .task-details {
     margin-top: 15px;

@@ -1,10 +1,10 @@
 .project-form {
-    background: white;
+    background: whitesmoke;
     padding: 25px;
     border-radius: 12px;
     display: grid;
     gap: 15px;
-    max-width: 700px;
+    max-width: 640px;
     margin-bottom: 30px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
