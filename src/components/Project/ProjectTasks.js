@@ -8,57 +8,28 @@ function ProjectTasks({ projectId }) {
 
     const navigate = useNavigate();
 
-    const projectTasks = tasks.filter(
-        task => Number(task.projectId) === Number(projectId)
-    );
-
+    const projectTasks = tasks.filter(task => Number(task.projectId) === Number(projectId));
 
     return (
         <div className="project-tasks">
-
             <div className="project-tasks-header">
-
                 <h2>Tasks</h2>
-
-                <button
-                    className="view-btn"
-                    onClick={() => navigate("/tasks")}
-                >
+                <button className="view-btn" onClick={() => navigate("/tasks")}>
                     Add Task
                 </button>
-
             </div>
 
-
             {projectTasks.length === 0 ? (
-
                 <div className="empty-state">
-
-                    <p>
-                        No tasks assigned to this project yet.
-                    </p>
-
+                    <p>No tasks assigned to this project yet.</p>
                 </div>
-
             ) : (
-
                 <div className="tasks-grid">
-
                     {projectTasks.map(task => (
-
-                        <TaskCard
-                            key={task.id}
-                            task={task}
-                            onDelete={deleteTask}
-                            onEdit={() => navigate("/tasks")}
-                        />
-
+                        <TaskCard key={task.id} task={task} onDelete={deleteTask} onEdit={() => navigate("/tasks")}/>
                     ))}
-
                 </div>
-
             )}
-
         </div>
     );
 }

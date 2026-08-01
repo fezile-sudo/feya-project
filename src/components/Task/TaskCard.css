@@ -1,66 +1,78 @@
 .task-card {
-    background: whitesmoke;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: var(--surface);
+    padding:20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
 }
 
 .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .task-header h3 {
-    margin: 0;
+    margin:0;
+    color:var(--text);
 }
 
 .priority {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    color:var(--text-on-primary);
 }
 
 .priority.low {
-    background: #10b981;
+    background:var(--success);
 }
 
 .priority.medium {
-    background: #f59e0b;
+    background:var(--warning);
 }
 
 .priority.high {
-    background: #ef4444;
+    background:var(--danger);
+}
+
+.task-card p {
+    color:var(--text-secondary);
 }
 
 .task-details {
-    margin-top: 15px;
+    margin-top:15px;
 }
 
 .task-details p {
-    margin: 8px 0;
+    margin:8px 0;
 }
 
 .task-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    display:flex;
+    gap:10px;
+    margin-top:20px;
 }
 
 .task-actions button {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    padding:8px 14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    color:var(--text-on-primary);
+    transition:.2s;
+}
+
+.task-actions button:hover {
+    opacity:.85;
 }
 
 .task-actions button:first-child {
-    background: #2563eb;
-    color: white;
+    background:var(--primary);
 }
 
 .task-actions button:last-child {
-    background: #ef4444;
-    color: white;
+    background:var(--danger);
 }

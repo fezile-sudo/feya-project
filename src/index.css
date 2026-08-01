@@ -27,10 +27,19 @@
     box-sizing:border-box;
 }
 
-body{
-    background:var(--background);
-    font-family:'Segoe UI',sans-serif;
-    color:var(--text);
+body {
+
+    margin: 0;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
 }
 
 button{

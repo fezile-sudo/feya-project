@@ -1,30 +1,33 @@
-.card{
-    background:whitesmoke;
-    border-radius:12px;
+.card {
+    background:var(--surface);
+    border-radius:var(--radius);
     padding:20px;
     display:flex;
     align-items:center;
     gap:15px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow);
     transition:.3s;
+    border:1px solid var(--border);
 }
 
-.card:hover{
+.card:hover {
     transform:translateY(-5px);
 }
 
-.card-color{
+.card-color {
     width:8px;
     height:70px;
     border-radius:8px;
 }
 
-.card-content h4{
-    color:#777;
+.card-content h4 {
+    color:var(--text-secondary);
     font-weight:500;
+    margin:0;
 }
 
-.card-content h2{
+.card-content h2 {
     margin-top:8px;
     font-size:30px;
+    color:var(--text);
 }

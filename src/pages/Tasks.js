@@ -69,11 +69,11 @@ function Tasks() {
 
             <div className="tasks-grid">
 
-                {tasks.length === 0 ? (
+                {filteredTasks.length === 0 ? (
                     <div className="empty-state">
-                        <h3>No tasks yet</h3>
-                        <p>Create your first task to get started. </p>
+                        <h3>No matching tasks</h3>
 
+                        <p>Try changing your search or filter.</p>
                     </div>
 
                 ) : (

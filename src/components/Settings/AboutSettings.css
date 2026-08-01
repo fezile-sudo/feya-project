@@ -1,0 +1,34 @@
+.about-settings h2 {
+    margin-bottom: 8px;
+}
+
+.about-card {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+}
+
+.about-card h3 {
+    margin-bottom: 12px;
+}
+
+.about-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.about-card ul {
+    padding-left: 20px;
+}
+
+.about-card li {
+    margin-bottom: 8px;
+}
+
+.about-footer {
+    margin-top: 30px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}

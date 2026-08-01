@@ -5,32 +5,22 @@ function PerformanceInsights({ projects, tasks }) {
 
     const completedTasks = tasks.filter(task => task.status === "Completed").length;
 
-    const completionRate =
-        totalTasks === 0
-            ? 0
-            : Math.round((completedTasks / totalTasks) * 100);
+    const completionRate = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
 
     const projectTaskCounts = projects.map(project => {
 
     const count = tasks.filter(task => String(task.projectId) === String(project.id)).length;
 
-         return {
-            title: project.title,
-            count
-        };
+         return {title: project.title, count };
 
     });
 
 
     const mostActiveProject = projectTaskCounts.sort((a, b) => b.count - a.count)[0];
 
-    const overdueTasks = tasks.filter(task => {
+    const overdueTasks = tasks.filter(task => {if (!task.dueDate) return false;
 
-        if (!task.dueDate) return false;
-
-        return (new Date(task.dueDate) < new Date() && task.status !== "Completed");
-
-         }).length;
+        return (new Date(task.dueDate) < new Date() && task.status !== "Completed"); }).length;
 
     const highPriorityTasks = tasks.filter(task => task.priority === "High" && task.status !== "Completed").length;
 

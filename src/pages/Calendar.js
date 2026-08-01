@@ -20,7 +20,6 @@ function Calendar() {
     // Task being edited
     const [editingTask, setEditingTask] = useState(null);
 
-
     // Convert tasks into FullCalendar events
     const events = tasks
         .filter(task => task.dueDate)

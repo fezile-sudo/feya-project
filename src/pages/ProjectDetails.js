@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 import { useNavigate } from "react-router-dom";
 import ProjectTasks from "../components/Project/ProjectTasks";
+import { useTasks } from "../context/TaskContext";
+import { getProjectProgress } from "../utils/projectHelpers";
 
 
 function ProjectDetails() {
@@ -9,6 +11,8 @@ function ProjectDetails() {
     const { id } = useParams();
 
     const { projects } = useProjects();
+
+    const { tasks } = useTasks();
 
     const navigate = useNavigate();
 
@@ -23,6 +27,13 @@ function ProjectDetails() {
             </div>
         );
     }
+
+    
+
+    const progress = getProjectProgress(
+        project.id,
+        tasks
+    );
 
 
 return (
@@ -40,7 +51,7 @@ return (
 
         <p><strong>Priority:</strong> {project.priority}</p>
 
-        <p><strong>Progress:</strong> {project.progress}%</p>
+        <p><strong>Progress:</strong> {progress}%</p>
 
         <p><strong>Due Date:</strong> {project.dueDate || "Not set"}</p>
 

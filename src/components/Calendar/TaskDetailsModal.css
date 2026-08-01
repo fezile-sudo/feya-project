@@ -35,7 +35,6 @@
     background: transparent;
     font-size: 25px;
     cursor: pointer;
-
 }
 
 .modal-details p {
@@ -84,7 +83,6 @@
 .modal-details p {
     margin: 10px 0;
 }
-
 
 modal-actions {
     display: flex;

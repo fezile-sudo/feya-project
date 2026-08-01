@@ -19,7 +19,6 @@ function ProjectProgressChart({ projects, tasks }) {
 
     });
 
-
     if (projects.length === 0) {
         return <p>No project data available.</p>;
     }
@@ -28,7 +27,6 @@ function ProjectProgressChart({ projects, tasks }) {
     return (
 
         <ResponsiveContainer width="100%" height={350}>
-
             <BarChart
                 data={data} layout="vertical">
 

@@ -1,0 +1,42 @@
+.preferences-settings h2 {
+    margin-bottom: 8px;
+}
+
+.preferences-settings .form-group {
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.preferences-settings label {
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.preferences-settings select {
+    padding:12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text);
+    font-size:14px;
+}
+
+.save-btn {
+    background:var(--primary);
+    color:var(--text-on-primary);
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.save-btn:hover {
+    background:var(--primary-hover);
+}
+
+.success-message {
+    color:var(--success);
+    margin-top:15px;
+    font-weight:600;
+}

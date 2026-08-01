@@ -7,8 +7,7 @@ function ProjectForm({ onSubmit, project, onCancel }) {
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("Medium");
     const [status, setStatus] = useState("Planning");
-    const [progress, setProgress] = useState(0);
-    const [dueDate, setDueDate] = useState("");
+     const [dueDate, setDueDate] = useState("");
 
     useEffect(() => {
         if (project) {
@@ -16,7 +15,6 @@ function ProjectForm({ onSubmit, project, onCancel }) {
             setDescription(project.description);
             setPriority(project.priority);
             setStatus(project.status);
-            setProgress(project.progress);
             setDueDate(project.dueDate);
         }
     }, [project]);
@@ -33,7 +31,6 @@ function ProjectForm({ onSubmit, project, onCancel }) {
             description,
             priority,
             status,
-            progress: Number(progress),
             dueDate,
             createdAt: project?.createdAt || new Date().toISOString()
         });
@@ -43,7 +40,6 @@ function ProjectForm({ onSubmit, project, onCancel }) {
             setDescription("");
             setPriority("Medium");
             setStatus("Planning");
-            setProgress(0);
             setDueDate("");
         }
     };
@@ -67,10 +63,6 @@ function ProjectForm({ onSubmit, project, onCancel }) {
                 <option>Completed</option>
                 <option>On Hold</option>
             </select>
-
-            <input type="range" min="0" max="100" value={progress} onChange={(e) => setProgress(e.target.value)}/>
-
-            <p>{progress}%</p>
 
             <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)}/>
 

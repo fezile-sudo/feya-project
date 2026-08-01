@@ -3,9 +3,9 @@ import "./TaskCard.css";
 
 function TaskCard({ task, onDelete, onEdit }) {
 
-    const { projects } = useProjects();
+   const { projects } = useProjects();
 
-    const project = projects.find( (project) => project.id === task.projectId);
+   const project = projects.find((project) => Number(project.id) === Number(task.projectId));
 
     return (
         <div className="task-card">

@@ -34,7 +34,7 @@ function ProjectWorkloadChart({ projects, tasks }) {
 
                 <Tooltip />
 
-                <Bar dataKey="tasks" fill="#2563eb"/>
+                <Bar dataKey="tasks" fill="var(--primary)"/>
 
             </BarChart>
 

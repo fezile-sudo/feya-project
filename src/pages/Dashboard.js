@@ -1,6 +1,9 @@
 import Card from "../components/Card/Card";
 import { useProjects } from "../context/ProjectContext";
 import { useTasks } from "../context/TaskContext";
+import { getProjectProgress } from "../utils/projectHelpers";
+
+import "./Dashboard.css";
 
 function Dashboard() {
 
@@ -34,6 +37,12 @@ function Dashboard() {
 
     const completedTasks = tasks.filter(task => task.status === "Completed").length;
 
+    const overallProgress = tasks.length === 0
+    ? 0
+    : Math.round(
+        (completedTasks / tasks.length) * 100
+    );
+
     // Upcoming deadlines
 
     const upcomingTasks = tasks
@@ -44,19 +53,19 @@ function Dashboard() {
 
 
     return (
-      <div>
+        <div className="dashboard-page">
           <h1>Dashboard</h1>
             <p>{today}</p>
 
           <h2>Projects Overview</h2>
             <div className="cards">
-                <Card title="Projects" value={totalProjects} color="#2563eb"/>
+                        <Card title="Projects" value={totalProjects} color="var(--primary)"/>
 
-                <Card title="Active" value={activeProjects} color="#10b981"/>
+                        <Card title="Active" value={activeProjects} color="var(--success)"/>
 
-                <Card title="Completed" value={completedProjects} color="#f59e0b"/>
+                        <Card title="Completed" value={completedProjects} color="var(--secondary)"/>
 
-                <Card title="On Hold" value={onHoldProjects} color="#ef4444"/>
+                        <Card title="On Hold" value={onHoldProjects} color="var(--danger)"/> 
 
             </div>
 
@@ -64,17 +73,15 @@ function Dashboard() {
 
             <h2 style={{ marginTop: "40px" }}>Tasks Overview</h2>
                 <div className="cards">
-                  <Card title="Total Tasks" value={totalTasks} color="#2563eb" />
+                        <Card title="Total Tasks" value={totalTasks} color="var(--primary)"/>
 
-                  <Card title="To Do" value={todoTasks} color="#ef4444" />
+                        <Card title="To Do" value={todoTasks} color="var(--danger)"/>
 
-                  <Card title="In Progress" value={inProgressTasks} color="#f59e0b" />
+                        <Card title="In Progress" value={inProgressTasks} color="var(--warning)"/>
 
-                  <Card title="Completed" value={completedTasks} color="#10b981" />
+                        <Card title="Completed" value={completedTasks} color="var(--success)"/>
 
             </div>
-
-
 
             <div style={{ marginTop: "40px" }}>
                <h2>Upcoming Deadlines</h2>
@@ -121,7 +128,9 @@ function Dashboard() {
 
                                 <p>{project.description}</p>
 
-                                <small>Status:{" "}<strong>{project.status}</strong></small>
+                                <small>Status: <strong>{project.status}</strong></small>
+
+                                <p>Progress:{" "}<strong>{getProjectProgress(project.id, tasks)}%</strong></p>
 
                             </div>
                           ))

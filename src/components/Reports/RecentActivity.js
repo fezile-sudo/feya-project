@@ -1,7 +1,6 @@
 function RecentActivity({ projects, tasks }) {
 
-    const activities = [
-        ...projects.map(project => ({
+    const activities = [...projects.map(project => ({
             id: `project-${project.id}`,
             type: "project",
             title: project.title,
@@ -13,14 +12,12 @@ function RecentActivity({ projects, tasks }) {
             id: `task-${task.id}`,
             type: "task",
             title: task.title,
-            action:
-                task.status === "Completed"
+            action: task.status === "Completed"
                     ? "Task completed"
                     : "Task created",
             date: task.createdAt
         }))
     ];
-
 
     const sortedActivities = activities.filter(activity => activity.date).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10);
 
@@ -40,10 +37,7 @@ function RecentActivity({ projects, tasks }) {
 
                     <h3>{activity.action}</h3>
 
-                    <p>{activity.type === "project"
-                            ? "Project: "
-                            : "Task: "
-                        }<strong>{activity.title}</strong></p>
+                    <p>{activity.type === "project" ? "Project: " : "Task: "}<strong>{activity.title}</strong></p>
 
                     <small>
                         {new Date(activity.date).toLocaleDateString(

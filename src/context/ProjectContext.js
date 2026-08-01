@@ -2,31 +2,41 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ProjectContext = createContext();
 
+
 export function ProjectProvider({ children }) {
 
     const [projects, setProjects] = useState(() => {
-        const saved = localStorage.getItem("projects");
+ 
+    const saved = localStorage.getItem("projects");
         return saved ? JSON.parse(saved) : [];
     });
 
-    useEffect(() => {localStorage.setItem("projects", JSON.stringify(projects));}, [projects]);
+    useEffect(() => {
+        localStorage.setItem("projects", JSON.stringify(projects));
+    }, [projects]);
 
-    const addProject = (project) => { setProjects(prev => [...prev, project]);};
+    const addProject = (project) => {
+
+    const newProject = {
+            priority: "Medium",
+            dueDate: "",
+            color: "blue",
+            createdAt: new Date().toISOString(),
+            ...project}; 
+
+        setProjects(prev => [...prev, newProject]);
+
+    };
 
     const deleteProject = (id) => {setProjects(prev => prev.filter(project => project.id !== id));};
 
     const updateProject = (updatedProject) => {
-        setProjects(prev => prev.map(project => project.id === updatedProject.id
-                    ? updatedProject
-                    : project
-            )
-        );
+        setProjects(prev =>prev.map(project =>project.id === updatedProject.id ? updatedProject : project));
     };
-    
 
     return (
-        <ProjectContext.Provider
-            value={{ projects, addProject, deleteProject, updateProject }} >
+
+        <ProjectContext.Provider value={{projects, addProject, deleteProject, updateProject }}>
             {children}
         </ProjectContext.Provider>
     );

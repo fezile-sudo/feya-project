@@ -70,11 +70,16 @@ function Projects() {
         <ProjectForm onSubmit={handleSubmit} project={editingProject} onCancel={() => setEditingProject(null)}/>
 
         <div className="projects-grid">
-                    {projects.length === 0 ? (
+                    {filteredProjects.length === 0 ? (
 
                     <div className="empty-state">
-                        <h3>No projects yet</h3>
-                        <p>Create your first project to get started.</p>
+                          <h3>
+                                No matching projects
+                            </h3>
+
+                            <p>
+                                Try changing your search or filter.
+                            </p>
                     </div>
 
                 ) : (

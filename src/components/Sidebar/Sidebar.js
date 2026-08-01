@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaTasks, FaCog, FaChartBar, FaCalendarAlt, FaProjectDiagram} from "react-icons/fa";
+import { useSettings } from "../../context/SettingsContext";
+
 import "./Sidebar.css";
 
 function Sidebar() {
 
     const [collapsed, setCollapsed] = useState(false);
 
+    const { settings } = useSettings();
+
     return (
-        <aside className={collapsed ? "sidebar collapsed" : "sidebar"}>
+        <aside className={`${collapsed ? "sidebar collapsed" : "sidebar"} ${settings.theme}`}>
 
             <button className="menu-btn" onClick={() => setCollapsed(!collapsed)}>
                 <FaBars />

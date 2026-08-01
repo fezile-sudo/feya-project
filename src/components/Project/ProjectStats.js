@@ -11,20 +11,13 @@ function ProjectStats() {
 
     const completedProjects = projects.filter(project => project.status === "Completed" ).length;
 
-    const averageProgress = projects.length
-        ? Math.round(
-            projects.reduce(
-                (total, project) => total + Number(project.progress),
-                0
-            ) / projects.length
-        )
-        : 0;
+    const averageProgress = projects.length ? Math.round(projects.reduce((total, project) => total + Number(project.progress), 0) / projects.length) : 0;
 
 
     return (
         <div className="cards">
 
-            <Card title="Total Projects" value={totalProjects} color="#2563eb" />
+            <Card title="Total Projects" value={totalProjects} color="var(--primary)" />
 
             <Card title="Active" value={activeProjects} color="#10b981" />
 

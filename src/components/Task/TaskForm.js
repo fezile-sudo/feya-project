@@ -29,16 +29,18 @@ function TaskForm({ onSubmit, task, onCancel }) {
         if (!title.trim()) return;
 
         onSubmit({
-            ...task,
-            id: task?.id || Date.now(),
-            title,
-            description,
-            projectId,
-            priority,
-            status,
-            dueDate,
-            createdAt: task?.createdAt || new Date().toISOString()
-        });
+
+                ...task,
+                id: task?.id || Date.now(),
+                title,
+                description,
+                projectId: Number(projectId),
+                priority,
+                status,
+                dueDate,
+                createdAt: task?.createdAt || new Date().toISOString()
+
+            });
 
         if (!task) {
             setTitle("");
