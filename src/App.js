@@ -6,6 +6,7 @@ import AuthLayout from "./components/Auth/AuthLayout";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import TaskDetails from "./pages/TaskDetails";
 import Calendar from "./pages/Calendar";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
@@ -32,25 +33,13 @@ function App() {
 
                 <Route element={<AuthLayout />}>
 
-                    <Route
-                        path="/login"
-                        element={<Login />}
-                    />
+                    <Route path="/login" element={<Login />}/>
 
-                    <Route
-                        path="/register"
-                        element={<Register />}
-                    />
+                    <Route path="/register" element={<Register />}/>
 
-                    <Route
-                        path="/forgot-password"
-                        element={<ForgotPassword />}
-                    />
+                    <Route path="/forgot-password" element={<ForgotPassword />}/>
 
-                    <Route
-                        path="/reset-password"
-                        element={<ResetPassword />}
-                    />
+                    <Route path="/reset-password" element={<ResetPassword />}/>
 
                 </Route>
 
@@ -63,40 +52,22 @@ function App() {
 
                     <Route element={<Layout />}>
 
-                        <Route
-                            path="/"
-                            element={<Dashboard />}
-                        />
+                        <Route path="/" element={<Dashboard />}/>
 
-                        <Route
-                            path="/projects"
-                            element={<Projects />}
-                        />
+                        <Route path="/projects" element={<Projects />}/>
 
-                        <Route
-                            path="/tasks"
-                            element={<Tasks />}
-                        />
+                        <Route path="/tasks" element={<Tasks />}/>
 
-                        <Route
-                            path="/calendar"
-                            element={<Calendar />}
-                        />
+                        <Route path="/tasks/:id" element={<TaskDetails />}/>
 
-                        <Route
-                            path="/reports"
-                            element={<Reports />}
-                        />
 
-                        <Route
-                            path="/settings"
-                            element={<Settings />}
-                        />
+                        <Route path="/calendar" element={<Calendar />}/>
 
-                        <Route
-                            path="/projects/:id"
-                            element={<ProjectDetails />}
-                        />
+                        <Route path="/reports" element={<Reports />}/>
+
+                        <Route path="/settings" element={<Settings />}/>
+
+                        <Route path="/projects/:id" element={<ProjectDetails />}/>
 
                     </Route>
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSettings } from "../context/SettingsContext";
 import SettingsMenu from "../components/Settings/SettingsMenu";
-
 import ProfileSettings from "../components/Settings/ProfileSettings";
 import AccountSettings from "../components/Settings/AccountSettings";
 import AppearanceSettings from "../components/Settings/AppearanceSettings";

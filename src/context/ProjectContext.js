@@ -2,44 +2,224 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ProjectContext = createContext();
 
-
 export function ProjectProvider({ children }) {
 
-    const [projects, setProjects] = useState(() => {
- 
-    const saved = localStorage.getItem("projects");
-        return saved ? JSON.parse(saved) : [];
-    });
+const [projects, setProjects] = useState([]);
+const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        localStorage.setItem("projects", JSON.stringify(projects));
-    }, [projects]);
+const getToken = () => {
+    return localStorage.getItem("feyaPlanToken");
+};
 
-    const addProject = (project) => {
+useEffect(() => {
 
-    const newProject = {
-            priority: "Medium",
-            dueDate: "",
-            color: "blue",
-            createdAt: new Date().toISOString(),
-            ...project}; 
+    const fetchProjects = async () => {
 
-        setProjects(prev => [...prev, newProject]);
+        try {
 
+            const token = getToken();
+
+            const response = await fetch(
+                "http://localhost:5000/api/projects",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch projects");
+            }
+
+            const data = await response.json();
+
+            const formattedProjects = data.map(project => ({
+                ...project,
+                title: project.name,
+                dueDate: project.due_date
+            }));
+
+            setProjects(formattedProjects);
+
+        } catch (error) {
+
+            console.error("Error fetching projects:", error);
+
+        } finally {
+
+            setLoading(false);
+
+        }
     };
 
-    const deleteProject = (id) => {setProjects(prev => prev.filter(project => project.id !== id));};
+    fetchProjects();
 
-    const updateProject = (updatedProject) => {
-        setProjects(prev =>prev.map(project =>project.id === updatedProject.id ? updatedProject : project));
-    };
+}, []);
 
-    return (
 
-        <ProjectContext.Provider value={{projects, addProject, deleteProject, updateProject }}>
-            {children}
-        </ProjectContext.Provider>
-    );
+const addProject = async (project) => {
+
+    try {
+
+        const token = getToken();
+
+        const response = await fetch(
+            "http://localhost:5000/api/projects",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+
+                body: JSON.stringify({
+                    name: project.title,
+                    description: project.description,
+                    status: project.status,
+                    priority: project.priority,
+                    due_date: project.dueDate || null
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to create project");
+        }
+
+        const savedProject = await response.json();
+
+        const formattedProject = {
+            ...savedProject,
+            title: savedProject.name,
+            dueDate: savedProject.due_date
+        };
+
+        setProjects(prev => [
+            ...prev,
+            formattedProject
+        ]);
+
+    } catch (error) {
+
+        console.error("Error creating project:", error);
+
+    }
+
+};
+
+
+const deleteProject = async (id) => {
+
+    try {
+
+        const token = getToken();
+
+        const response = await fetch(
+            `http://localhost:5000/api/projects/${id}`,
+            {
+                method: "DELETE",
+
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to delete project");
+        }
+
+        await response.json();
+
+        setProjects(prev =>
+            prev.filter(project => project.id !== id)
+        );
+
+    } catch (error) {
+
+        console.error("Error deleting project:", error);
+
+    }
+
+};
+
+
+const updateProject = async (updatedProject) => {
+
+    try {
+
+        const token = getToken();
+
+        const response = await fetch(
+            `http://localhost:5000/api/projects/${updatedProject.id}`,
+            {
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+
+                body: JSON.stringify({
+                    name: updatedProject.title,
+                    description: updatedProject.description,
+                    status: updatedProject.status,
+                    priority: updatedProject.priority,
+                    due_date: updatedProject.dueDate || null
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to update project");
+        }
+
+        const savedProject = await response.json();
+
+        const formattedProject = {
+            ...savedProject,
+            title: savedProject.name,
+            dueDate: savedProject.due_date
+        };
+
+        setProjects(prev =>
+            prev.map(project =>
+                project.id === formattedProject.id
+                    ? formattedProject
+                    : project
+            )
+        );
+
+    } catch (error) {
+
+        console.error("Error updating project:", error);
+
+    }
+
+};
+
+
+return (
+
+    <ProjectContext.Provider
+        value={{
+            projects,
+            addProject,
+            deleteProject,
+            updateProject,
+            loading
+        }}
+    >
+
+        {children}
+
+    </ProjectContext.Provider>
+
+);
+
+
 }
 
 export const useProjects = () => useContext(ProjectContext);

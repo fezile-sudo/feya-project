@@ -1,65 +1,158 @@
 import { createContext, useContext, useState } from "react";
 
-
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
 
-        const [user, setUser] = useState(() => {
+const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("feyaPlanUser");
 
-        const savedUser = localStorage.getItem("feyaPlanUser");
-        return savedUser
-            ? JSON.parse(savedUser)
-            : null;
-        });
+    return savedUser
+        ? JSON.parse(savedUser)
+        : null;
+});
 
-        const register = (userData) => {
+const register = async (userData) => {
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            }
+        );
 
-        const newUser = {...userData, avatar: userData.avatar || null};
-        localStorage.setItem("feyaPlanUser", JSON.stringify(newUser));
-        setUser(newUser);
+        const data = await response.json();
+
+        if (!response.ok) {
+            return {
+                success: false,
+                error: data.error || "Registration failed"
+            };
+        }
+
+        localStorage.setItem("feyaPlanUser", JSON.stringify(data));
+
+        setUser(data);
+
+        return {
+            success: true,
+            user: data
         };
 
-        const login = (email, password, remember) => {
+    } catch (error) {
+        console.error("REGISTER ERROR:", error);
 
-        const savedUser = localStorage.getItem("feyaPlanUser");
-        if (!savedUser) {
-            return false;
-        }
+        return {
+            success: false,
+            error: "Unable to connect to server"
+        };
+    }
+};
 
-        const storedUser = JSON.parse(savedUser);
-        if (storedUser.email === email && storedUser.password === password) {
-
-            if (remember) {
-                localStorage.setItem(
-                    "feyaPlanRemember",
-                    "true"
-                );
+const login = async (email, password, remember) => {
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
             }
-            setUser(storedUser);
-            return true;
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return {
+                success: false,
+                error: data.error || "Invalid email or password"
+            };
         }
-        return false;
+
+        localStorage.setItem("feyaPlanUser", JSON.stringify(data.user));
+
+        localStorage.setItem("feyaPlanToken", data.token);
+
+        if (remember) {
+            localStorage.setItem(
+                "feyaPlanRemember",
+                "true"
+            );
+        } else {
+            localStorage.removeItem("feyaPlanRemember");
+        }
+
+        setUser(data.user);
+
+        return {
+            success: true,
+            user: data.user,
+            token: data.token
+        };
+
+    } catch (error) {
+        console.error("LOGIN ERROR:", error);
+
+        return {
+            success: false,
+            error: "Unable to connect to server"
+        };
+    }
+};
+
+const logout = () => {
+    localStorage.removeItem("feyaPlanRemember");
+    localStorage.removeItem("feyaPlanUser");
+    localStorage.removeItem("feyaPlanToken");
+
+    setUser(null);
+};
+
+const updateUser = (changes) => {
+
+    const currentUser = JSON.parse(
+        localStorage.getItem("feyaPlanUser")
+    );
+
+    const updatedUser = {
+        ...currentUser,
+        ...changes
     };
 
-    const logout = () => {localStorage.removeItem("feyaPlanRemember"); setUser(null);};
+    localStorage.setItem(
+        "feyaPlanUser",
+        JSON.stringify(updatedUser)
+    );
 
-    const updateUser = (changes) => {
-
-    const currentUser = JSON.parse(localStorage.getItem("feyaPlanUser"));
-
-    const updatedUser = {...currentUser, ...changes};
-
-    localStorage.setItem("feyaPlanUser", JSON.stringify(updatedUser));
     setUser(updatedUser);
 };
 
-    return (
-        <AuthContext.Provider
-            value={{user, register, login, logout, updateUser}} >
-            {children}
-        </AuthContext.Provider>
-    );
+return (
+    <AuthContext.Provider
+        value={{
+            user,
+            register,
+            login,
+            logout,
+            updateUser
+        }}
+    >
+        {children}
+    </AuthContext.Provider>
+);
+
+
 }
 
-export function useAuth() {return useContext(AuthContext);}
+export function useAuth() {
+return useContext(AuthContext);
+}

@@ -1,29 +1,89 @@
 .calendar-page {
-    padding: 20px;
+padding: 20px;
 }
 
-.calendar-task-details {
-    margin-top: 25px;
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+.calendar-page h1 {
+color: var(--text);
+margin-bottom: 20px;
 }
 
-.calendar-task-details h2 {
-    margin-top: 0;
+/* FullCalendar */
+
+.calendar-page .fc {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+padding: 15px;
 }
 
-.calendar-task-details p {
-    margin: 10px 0;
+/* Calendar buttons */
+
+.calendar-page .fc .fc-button {
+background: var(--primary);
+border-color: var(--primary);
+color: var(--text-on-primary);
+font-weight: 600;
 }
 
-.calendar-task-details button {
-    margin-top: 15px;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #2563eb;
-    color: white;
+.calendar-page .fc .fc-button:hover {
+opacity: 0.85;
+}
+
+.calendar-page .fc .fc-button:disabled {
+opacity: 0.6;
+}
+
+/* Calendar title */
+
+.calendar-page .fc .fc-toolbar-title {
+color: var(--text);
+font-size: 1.4rem;
+}
+
+/* Day numbers */
+
+.calendar-page .fc .fc-daygrid-day-number {
+color: var(--text);
+}
+
+/* Today's date */
+
+.calendar-page .fc .fc-day-today {
+background: var(--primary-bg) !important;
+}
+
+/* Events */
+
+.calendar-page .fc-event {
+border-radius: 6px;
+padding: 2px 4px;
+cursor: pointer;
+}
+
+/* Calendar borders */
+
+.calendar-page .fc-theme-standard td,
+.calendar-page .fc-theme-standard th {
+border-color: var(--border);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+.calendar-page {
+    padding: 15px;
+}
+
+.calendar-page .fc {
+    padding: 8px;
+}
+
+.calendar-page .fc .fc-toolbar {
+    flex-direction: column;
+    gap: 10px;
+}
+
+
 }

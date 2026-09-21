@@ -64,7 +64,7 @@ function SecuritySettings() {
                 <h3>Security Alerts</h3>
 
                 <label className="security-toggle">
-                    <inpu type="checkbox" name="securityAlerts" checked={security.securityAlerts} onChange={handleToggle}/>
+                    <input type="checkbox" name="securityAlerts" checked={security.securityAlerts} onChange={handleToggle}/>
                     Receive security notifications
                 </label>
             </section>

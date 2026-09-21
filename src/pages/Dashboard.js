@@ -37,11 +37,7 @@ function Dashboard() {
 
     const completedTasks = tasks.filter(task => task.status === "Completed").length;
 
-    const overallProgress = tasks.length === 0
-    ? 0
-    : Math.round(
-        (completedTasks / tasks.length) * 100
-    );
+    
 
     // Upcoming deadlines
 

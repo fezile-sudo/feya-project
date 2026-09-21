@@ -19,9 +19,9 @@ function ProjectCard({project, onDelete, onEdit}) {
             <div className="project-header">
                 <h2>{project.title}</h2>
 
-                <span className={`status ${(project.status || "Planning").toLowerCase()}`}>
-                    {project.status}
-                </span>
+                <span className={`status ${project.status?.toLowerCase().replace(/\s+/g, "-")}`}>
+            {project.status} </span>
+
             </div>
 
             <p className="project-description">{project.description || "No description provided."}</p>
@@ -50,9 +50,16 @@ function ProjectCard({project, onDelete, onEdit}) {
                 Edit
             </button>
 
-            <button className="delete-btn" onClick={() => onDelete(project.id)}>
-                Delete
-            </button>
+            <button className="delete-btn" onClick={() => {
+                const confirmed = window.confirm(`Are you sure you want to delete "${project.title}"?`);
+
+            if (confirmed) {
+            onDelete(project.id);
+        }
+    }}
+>
+    Delete
+</button>
 
             </div>
 
