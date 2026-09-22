@@ -3,6 +3,9 @@ import { useAuth } from "../../context/AuthContext";
 
 import "./ProfileSettings.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 function ProfileSettings() {
 
 const { user, updateUser } = useAuth();
@@ -44,7 +47,8 @@ const handleSubmit = async (e) => {
         const token = localStorage.getItem("feyaPlanToken");
 
         const response = await fetch(
-            "http://localhost:5000/api/users/profile",
+            `${API_URL}/api/users/profile`,
+
             {
                 method: "PUT",
 

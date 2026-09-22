@@ -3,6 +3,9 @@ import { useAuth } from "../../context/AuthContext";
 
 import "./AccountSettings.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 function AccountSettings() {
 
 const { user } = useAuth();
@@ -55,7 +58,8 @@ const handlePasswordUpdate = async (e) => {
         const token = localStorage.getItem("feyaPlanToken");
 
         const response = await fetch(
-            "http://localhost:5000/api/users/password",
+            `${API_URL}/api/users/password`,
+
             {
                 method: "PUT",
 

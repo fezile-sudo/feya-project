@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const ProjectContext = createContext();
+
 
 export function ProjectProvider({ children }) {
 
@@ -20,7 +23,7 @@ useEffect(() => {
             const token = getToken();
 
             const response = await fetch(
-                "http://localhost:5000/api/projects",
+                `${API_URL}/api/projects`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -65,7 +68,7 @@ const addProject = async (project) => {
         const token = getToken();
 
         const response = await fetch(
-            "http://localhost:5000/api/projects",
+            `${API_URL}/api/projects`,
             {
                 method: "POST",
 
@@ -117,7 +120,7 @@ const deleteProject = async (id) => {
         const token = getToken();
 
         const response = await fetch(
-            `http://localhost:5000/api/projects/${id}`,
+            `${API_URL}/api/projects/${id}`,
             {
                 method: "DELETE",
 
@@ -153,7 +156,7 @@ const updateProject = async (updatedProject) => {
         const token = getToken();
 
         const response = await fetch(
-            `http://localhost:5000/api/projects/${updatedProject.id}`,
+            `${API_URL}/api/projects/${updatedProject.id}`,
             {
                 method: "PUT",
 

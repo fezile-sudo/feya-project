@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const TaskContext = createContext();
+
 
 export function TaskProvider({ children }) {
 
@@ -30,8 +33,8 @@ useEffect(() => {
             }
 
             const response = await fetch(
-                "http://localhost:5000/api/tasks",
-                {
+               `${API_URL}/api/tasks`,
+                 {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -71,7 +74,8 @@ const addTask = async (task) => {
         const token = localStorage.getItem("feyaPlanToken");
 
         const response = await fetch(
-            "http://localhost:5000/api/tasks",
+            `${API_URL}/api/tasks`,
+
             {
                 method: "POST",
 
@@ -124,7 +128,8 @@ const deleteTask = async (id) => {
         const token = localStorage.getItem("feyaPlanToken");
 
         const response = await fetch(
-            `http://localhost:5000/api/tasks/${id}`,
+            `${API_URL}/api/tasks/${id}`,
+
             {
                 method: "DELETE",
 
@@ -162,7 +167,8 @@ const updateTask = async (updatedTask) => {
         const token = localStorage.getItem("feyaPlanToken");
 
         const response = await fetch(
-            `http://localhost:5000/api/tasks/${updatedTask.id}`,
+            `${API_URL}/api/tasks/${updatedTask.id}`,
+
             {
                 method: "PUT",
 

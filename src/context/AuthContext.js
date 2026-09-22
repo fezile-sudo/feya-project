@@ -1,6 +1,9 @@
 import { createContext, useContext, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AuthContext = createContext();
+
 
 export function AuthProvider({ children }) {
 
@@ -15,7 +18,8 @@ const [user, setUser] = useState(() => {
 const register = async (userData) => {
     try {
         const response = await fetch(
-            "http://localhost:5000/api/auth/register",
+            `${API_URL}/api/auth/register`,
+
             {
                 method: "POST",
                 headers: {
@@ -56,7 +60,8 @@ const register = async (userData) => {
 const login = async (email, password, remember) => {
     try {
         const response = await fetch(
-            "http://localhost:5000/api/auth/login",
+            `${API_URL}/api/auth/login`,
+
             {
                 method: "POST",
                 headers: {
