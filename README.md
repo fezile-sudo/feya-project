@@ -1,279 +1,290 @@
-feyaPlan
+# FeyaPlan
 
-feyaPlan is a full-stack project and task management application designed to help users organize projects, manage tasks, track progress, and visualize deadlines through a calendar.
+FeyaPlan is a full-stack project and task management application designed to help users organize projects, manage tasks, track progress, and visualize deadlines through a calendar.
 
-The application uses a React frontend, an Express/Node.js backend, and PostgreSQL for persistent data storage. Authentication is handled using JWT tokens, with passwords securely hashed using bcrypt.
+The application is built with a React frontend, an Express/Node.js REST API, and PostgreSQL for persistent data storage.
 
-Features
-Authentication
+Authentication uses JWT tokens, while user passwords are securely hashed using bcryptjs.
 
-User registration
+---
 
-User login
+## Live Application
 
-JWT-based authentication
+### Frontend
 
-Protected application routes
+https://feyaplan.onrender.com
 
-Secure password hashing with bcrypt
+### Backend API
 
-Password change functionality
+https://feyaplan-api.onrender.com
 
-Logout functionality
+The frontend and backend are deployed separately.
 
-User-specific data access
+The React frontend communicates with the Express API, which connects to the production PostgreSQL database hosted through Neon.
 
-Projects
+---
 
-Create projects
+# Features
 
-Edit projects
+## Authentication
 
-Delete projects
+- User registration
+- Existing-user login
+- JWT-based authentication
+- Protected application routes
+- Secure password hashing with bcryptjs
+- Password change functionality
+- Logout functionality
+- Persistent login state
+- User-specific data access
 
-View project details
+Users can log in using an account that already exists in the production database. Registration is only required when creating a new account.
 
-Project status tracking
+---
 
-Project priority
+## Projects
 
-Project due dates
+- Create projects
+- Edit projects
+- Delete projects
+- View project details
+- Project status tracking
+- Project priority
+- Project due dates
+- Project progress based on associated tasks
+- Projects are owned by the authenticated user
 
-Project progress based on associated tasks
+---
 
-Projects are owned by the authenticated user
+## Tasks
 
-Tasks
+- Create tasks
+- Edit tasks
+- Delete tasks
+- Task descriptions
+- Task status tracking
+- Task priority
+- Task progress
+- Task due dates
+- Assign tasks to projects
+- Search tasks
+- Filter tasks by status
+- Task statistics
+- Delete confirmation
+- User-specific task access
 
-Create tasks
+---
 
-Edit tasks
+## Calendar
 
-Delete tasks
+- Monthly calendar view
+- Weekly calendar view
+- Daily calendar view
+- Tasks displayed according to their due dates
+- Status-based task colors
+- Click a task to view its details
+- Edit tasks directly from the calendar
+- Drag and drop tasks to change their due dates
+- Calendar changes are persisted through the API
 
-Task descriptions
+---
 
-Task status tracking
+## Dashboard
 
-Task priority
+- Project overview
+- Task overview
+- Progress information
+- Activity and status information
+- Dynamic application data
 
-Task progress
+---
 
-Task due dates
+## Reports
+
+- Project information
+- Task information
+- Progress information
+- Status-based reporting
+- Reports generated from current project and task data
+
+---
+
+## Settings
+
+- Profile information
+- Account settings
+- Password management
+- Appearance preferences
+- Notification preferences
+- Security preferences
+- General preferences
+- Application information
+- Reset settings functionality
+
+---
+
+# Technology Stack
+
+## Frontend
+
+- React
+- React Router
+- JavaScript
+- CSS
+- FullCalendar
+
+## Backend
+
+- Node.js
+- Express
+- PostgreSQL
+- pg
+- bcryptjs
+- JSON Web Tokens
+- CORS
+- dotenv
+
+## Database
+
+- PostgreSQL
+- Neon PostgreSQL
+
+## Deployment
+
+- Render Static Site — React frontend
+- Render Web Service — Express backend
+- Neon — PostgreSQL database
+
+---
+
+# Application Architecture
+
+FeyaPlan follows a client/server architecture.
+
+```text
+┌──────────────────────────┐
+│                          │
+│     React Frontend       │
+│     Render Static Site   │
+│                          │
+└────────────┬─────────────┘
+             │
+             │ HTTPS / JSON
+             │ JWT
+             ▼
+┌──────────────────────────┐
+│                          │
+│      Express API         │
+│      Node.js Backend     │
+│      Render Web Service  │
+│                          │
+└────────────┬─────────────┘
+             │
+             │ PostgreSQL
+             ▼
+┌──────────────────────────┐
+│                          │
+│    Neon PostgreSQL       │
+│                          │
+
+└──────────────────────────
+
+The production services are:
 
-Assign tasks to projects
-
-Search tasks
-
-Filter tasks by status
-
-Task statistics
-
-Delete confirmation
-
-User-specific task access
-
-Calendar
-
-Monthly calendar view
-
-Weekly calendar view
-
-Daily calendar view
-
-Tasks displayed according to their due dates
-
-Status-based task colors
-
-Click a task to view its details
-
-Edit tasks directly from the calendar
-
-Drag and drop tasks to change their due dates
-
-Calendar changes are persisted through the API
-
-Dashboard
-
-Project overview
-
-Task overview
-
-Progress information
-
-Activity and status information
-
-Data updates dynamically from the application state
-
-Reports
-
-Project and task information
-
-Progress information
-
-Status-based reporting
-
-Data generated from the application's current project and task data
-
-Settings
-
-Profile information
-
-Account settings
-
-Password management
-
-Appearance preferences
-
-Notification preferences
-
-Security preferences
-
-General preferences
-
-Application information
-
-Reset settings functionality
-
-Tech Stack
 Frontend
+https://feyaplan.onrender.com
 
-React
+        ↓
 
-React Router
+Backend API
+https://feyaplan-api.onrender.com
 
-FullCalendar
+        ↓
 
-JavaScript
+Neon PostgreSQL
 
-CSS
+Authentication
+FeyaPlan uses JWT authentication.
 
-Backend
-
-Node.js
-
-Express
-
-PostgreSQL
-
-pg
-
-bcryptjs
-
-JSON Web Tokens
-
-CORS
-
-dotenv
-
-Database
-
-PostgreSQL is used for persistent storage.
-
-The main data relationships include:
-
-Users
-  │
-  ├── Projects
-  │      │
-  │      └── Tasks
-  │
-  └── Tasks
-
-
-Projects and tasks are associated with the authenticated user.
-
-Tasks are also associated with projects.
-
-Application Architecture
-
-The application follows a client/server architecture.
-
-┌──────────────────────┐
-│      React App       │
-│      Frontend        │
-└──────────┬───────────┘
-           │
-           │ HTTP / JSON
-           │ JWT
-           ▼
-┌──────────────────────┐
-│    Express API       │
-│      Backend         │
-└──────────┬───────────┘
-           │
-           │ SQL
-           ▼
-┌──────────────────────┐
-│     PostgreSQL       │
-│       Database       │
-└──────────────────────┘
-
-
-The frontend communicates with the Express API.
-
-The API authenticates requests using JWT tokens and performs database operations using PostgreSQL.
-
-Authentication Flow
-
-When a user logs in:
-
+The authentication process is:
 User
  │
  │ Email + Password
  ▼
+React Frontend
+ │
+ │ POST /api/auth/login
+ ▼
 Express API
  │
- │ Check user
+ │ Find user by email
+ ▼
+PostgreSQL
  │
- │ bcrypt password verification
+ │ User + password_hash
+ ▼
+bcryptjs
+ │
+ │ Compare supplied password
+ │ with stored password hash
  ▼
 JWT Token
  │
  ▼
 React Application
  │
- │ Store token
+ │ Store authentication information
  ▼
 Authenticated API Requests
+Passwords are never stored as plain text.
 
+During registration, the backend hashes the supplied password:
+const passwordHash = await bcrypt.hash(password, 10);
 
-Protected API requests include the token:
+During login, the supplied password is compared against the stored hash:
+const passwordMatch = await bcrypt.compare(
+    password,
+    user.password_hash
+);
+A successful login generates a JWT:
+const token = jwt.sign(
+    { userId: user.id },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+);
 
+Protected requests use:
 Authorization: Bearer <token>
-
-
-The backend validates the token before allowing access to protected resources.
+The backend validates the token using the authentication middleware before allowing access to protected resources.
 
 User Data Isolation
-
 Projects and tasks are associated with the authenticated user's ID.
 
-For example, project queries use the authenticated user:
-
+For example:
 SELECT *
 FROM projects
 WHERE user_id = $1;
 
+Tasks follow the same ownership model.
 
-Task queries follow the same principle.
+The API also verifies project ownership before allowing tasks to be associated with a project.
 
-The API also verifies project ownership before allowing a task to be created or moved to a project.
-
-This prevents users from accessing or modifying resources belonging to another user.
+This prevents users from accessing or modifying project and task data belonging to another user.
 
 Database
+FeyaPlan uses PostgreSQL for persistent data storage.
 
-The application uses PostgreSQL.
+The production database is hosted using Neon.
 
 The main tables are:
+users
+projects
+tasks
 
 Users
-
 Stores account and profile information.
 
-Typical fields include:
-
+Important fields include:
 id
 name
 email
@@ -282,13 +293,13 @@ avatar
 phone
 job_title
 bio
+created_at
+updated_at
 
 Projects
+Stores projects belonging to users.
 
-Stores user-owned projects.
-
-Typical fields include:
-
+Important fields include:
 id
 name
 description
@@ -298,11 +309,9 @@ due_date
 user_id
 
 Tasks
+Stores tasks belonging to users and associated with projects.
 
-Stores user-owned tasks associated with projects.
-
-Typical fields include:
-
+Important fields include:
 id
 title
 description
@@ -311,29 +320,64 @@ priority
 progress
 due_date
 created_at
-project_id
 user_id
+project_id
 
-
-Relationships:
+Database Relationships
+The relationships are:
 
 users.id
    │
-   ├──────── projects.user_id
+   ├────────────── projects.user_id
    │
-   └──────── tasks.user_id
+   └────────────── tasks.user_id
+
 
 projects.id
    │
-   └──────── tasks.project_id
+   └────────────── tasks.project_id
 
-API
+his means:
 
+One user can own multiple projects.
+
+One user can own multiple tasks.
+
+A project can contain multiple tasks.
+
+A task belongs to a project.
+
+Projects and tasks are associated with their owning user.
+
+Foreign keys enforce these relationships at the database level.
+
+REST API
 The backend provides REST API endpoints for authentication, projects, and tasks.
 
 Authentication
+Register
+
 POST /api/auth/register
+
+Creates a new user account.
+
+Example request:
+{
+  "name": "Example User",
+  "email": "user@example.com",
+  "password": "password"
+}
+
+Login
 POST /api/auth/login
+
+Authenticates an existing user and returns a JWT.
+
+Example request:
+{
+  "email": "user@example.com",
+  "password": "password"
+}
 
 Projects
 GET    /api/projects
@@ -341,53 +385,39 @@ POST   /api/projects
 PUT    /api/projects/:id
 DELETE /api/projects/:id
 
+These endpoints require authentication.
+
 Tasks
 GET    /api/tasks
 POST   /api/tasks
 PUT    /api/tasks/:id
 DELETE /api/tasks/:id
 
-
-Protected endpoints require a valid JWT token.
+These endpoints require authentication.
 
 Project Structure
-
-A simplified project structure:
-
-feyaPlan/
+The current repository is organized around the React frontend and Express backend.
+feya-project/
 │
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Auth/
-│   │   │   ├── Calendar/
-│   │   │   ├── Layout/
-│   │   │   ├── Project/
-│   │   │   ├── Settings/
-│   │   │   └── Task/
-│   │   │
-│   │   ├── context/
-│   │   │   ├── AuthContext.jsx
-│   │   │   ├── ProjectContext.jsx
-│   │   │   ├── TaskContext.jsx
-│   │   │   └── SettingsContext.jsx
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Projects.jsx
-│   │   │   ├── ProjectDetails.jsx
-│   │   │   ├── Tasks.jsx
-│   │   │   ├── Calendar.jsx
-│   │   │   ├── Reports.jsx
-│   │   │   ├── Settings.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
-│   │   │   ├── ForgotPassword.jsx
-│   │   │   └── ResetPassword.jsx
-│   │   │
-│   │   └── utils/
+├── public/
+│
+├── src/
+│   ├── components/
+│   │   ├── Auth/
+│   │   ├── Calendar/
+│   │   ├── Layout/
+│   │   ├── Project/
+│   │   ├── Settings/
+│   │   └── Task/
 │   │
-│   └── package.json
+│   ├── context/
+│   │   ├── AuthContext.js
+│   │   ├── ProjectContext.js
+│   │   └── TaskContext.js
+│   │
+│   ├── pages/
+│   │
+│   └── ...
 │
 ├── server/
 │   ├── middleware/
@@ -398,129 +428,125 @@ feyaPlan/
 │   ├── package.json
 │   └── .env
 │
+├── .gitignore
+├── package.json
+├── package-lock.json
 └── README.md
 
-
-The exact structure may vary depending on the final project organization.
+The exact component structure may continue to evolve as the application is developed.
 
 Getting Started
 Prerequisites
-
-Make sure the following are installed:
+Install the following:
 
 Node.js
 
 npm
 
-PostgreSQL
+PostgreSQL for local database development
 
-Installation
+For production, FeyaPlan uses Neon PostgreSQL instead of a local PostgreSQL server.
 
-Clone the repository and enter the project directory:
+Clone the Repository
+git clone https://github.com/fezile-sudo/feya-project.git
+cd feya-project
 
-git clone <repository-url>
-cd feyaPlan
-
-
-Install the frontend dependencies:
-
-cd client
+Install Dependencies
+Install the frontend dependencies from the project root:
 npm install
-
 
 Install the backend dependencies:
-
-cd ../server
+cd server
 npm install
 
+cd server
+npm install
 Environment Variables
+Environment variables must not be committed to Git.
 
-Create a .env file inside the backend/server directory.
+The backend uses environment variables for database access and JWT authentication.
+
+Backend .env
+Create:
+server/.env
 
 Example:
-
 PORT=5000
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_secure_random_secret
 
-DATABASE_URL=postgresql://username:password@localhost:5432/feyaplan
+Frontend Environment Variables
+The React frontend uses:
+REACT_APP_API_URL=https://feyaplan-api.onrender.com
+For local development, this can instead point to the local backend:
+REACT_APP_API_URL=http://localhost:5000
 
-JWT_SECRET=your_secure_jwt_secret
+The frontend uses this variable when making API requests:
+const API_URL = process.env.REACT_APP_API_URL;
 
+Production Environment
+The production deployment uses separate environment configuration for the frontend and backend.
 
-Do not commit .env to version control.
+Render Static Site
+Service:
+feyaplan
+Production URL: https://feyaplan.onrender.com
+Required frontend environment variable:REACT_APP_API_URL=https://feyaplan-api.onrender.com
 
-Add it to .gitignore:
+Render Web Service
+Service: feyaplan-api
+Production URL: https://feyaplan-api.onrender.com
+Required backend environment variables: DATABASE_URL=<Neon PostgreSQL connection string>
+JWT_SECRET=<secure JWT secret>
 
-.env
-node_modules/
+The backend reads these values through process.env.
 
-Database Setup
+Neon PostgreSQL
+The production database is hosted using Neon PostgreSQL.
 
-Create a PostgreSQL database:
-
-CREATE DATABASE feyaplan;
-
-
-Create the required tables and constraints using the SQL schema for the project.
-
-The database should include relationships between:
-
-users
+The production backend connects to Neon through: DATABASE_URL
+The application database contains:users
 projects
 tasks
 
-
-Foreign keys should enforce the relationships between users, projects, and tasks.
-
-Running the Application
+Local Development
 Start the Backend
-
-From the server directory:
-
-npm start
-
-
-The API runs on:
-
-http://localhost:5000
-
-
-You should see:
-
-Server running on http://localhost:5000
+From the server directory: npm start
+The backend normally runs on: http://localhost:5000
+You should see: Server running on port 5000
 
 Start the Frontend
+From the project root: npm start
+The React development server normally runs on: http://localhost:3000
+The frontend should have: REACT_APP_API_URL=http://localhost:5000
+when running against the local backend.
 
-From the client directory:
-
-npm start
-
-
-The React application will normally be available at:
-
-http://localhost:3000
-
-Development Workflow
-
-During development, changes generally flow through:
+Development Request Flow
+During development, requests generally follow this path:
 
 React Component
       ↓
-Context
+React Context
       ↓
 Fetch API
       ↓
 Express Route
       ↓
-Authentication Middleware
+JWT Authentication
+      ↓
+Authorization / Ownership Check
       ↓
 PostgreSQL
-
+      ↓
+API Response
+      ↓
+React State Update
 
 For example, creating a task:
 
-TaskForm
+Task Form
    ↓
-TaskContext.addTask()
+TaskContext
    ↓
 POST /api/tasks
    ↓
@@ -536,82 +562,169 @@ API response
    ↓
 React state update
 
+Deployment
+FeyaPlan is deployed using Render.
+
+The deployment is split into two services.
+
+Frontend
+Render Static Site
+        │
+        ▼
+https://feyaplan.onrender.com
+The frontend is built using: npm run build
+
+Backend
+Render Web Service
+        │
+        ▼
+https://feyaplan-api.onrender.com
+
+The backend is started using: npm start
+which runs: node server.js
+
+Deployment Relationship
+
+GitHub
+  │
+  ├── main branch
+  │
+  ├──────────────► Render Static Site
+  │                 │
+  │                 └── React production build
+  │
+  └──────────────► Render Web Service
+                    │
+                    └── Node.js / Express API
+                              │
+                              ▼
+                       Neon PostgreSQL
+
+Changes pushed to the main branch can be deployed through the configured Render services.
+
+Database Migration and Backups
+PostgreSQL database backups can be created using PostgreSQL tools such as pg_dump.
+
+The project database contains: users
+projects
+tasks
+A database backup should be stored securely and should not be committed to the public Git repository if it contains user information.
+
+Database backups may contain:
+
+User email addresses
+
+Profile information
+
+Password hashes
+
+Projects
+
+Tasks
+
+Other application data
+
+Even though passwords are hashed, database backups should still be treated as sensitive.
+
 Security
+FeyaPlan uses several security practices.
 
-The application uses several security measures:
+Password hashing
+Passwords are hashed using bcryptjs.
 
-Passwords are hashed using bcrypt.
+JWT authentication
+Protected API routes require a valid JWT.
 
-Password hashes are never returned as part of normal user responses.
+Parameterized SQL
+Database queries use parameterized values rather than directly concatenating user input into SQL statements.
 
-Protected API routes require JWT authentication.
+User ownership
+Projects and tasks are associated with authenticated users.
 
-Project ownership is verified before task assignment.
+Project ownership checks
+The API verifies that a user owns a project before allowing operations involving that project.
 
-Database queries use parameterized SQL values.
-
-User-specific resources are filtered by authenticated user ID.
-
-Sensitive environment variables are stored outside the source code.
+Environment variables
+Sensitive values such as: DATABASE_URL
+JWT_SECRET
 
 Error Handling
+The API uses HTTP status codes to communicate common errors.
 
-The API returns appropriate HTTP status codes for common failures.
-
-Examples include:
-
-400 Bad Request
+Examples include: 400 Bad Request
 401 Unauthorized
 403 Forbidden
 404 Not Found
 409 Conflict
 500 Internal Server Error
 
-
-Example:
-
-{
-    "error": "Invalid email or password"
+Example authentication error: {
+  "error": "Invalid email or password"
 }
 
+Current Production Status
+FeyaPlan currently has a working production deployment consisting of:
 
-The frontend can display these API errors to the user where appropriate.
+React frontend
 
-Current Status
+Express/Node.js backend
 
-feyaPlan currently includes the main functionality required for a full-stack project and task management application.
+Neon PostgreSQL database
 
-Implemented:
+JWT authentication
 
-Authentication       
-PostgreSQL           
-Express API          
-JWT protection       
-Projects             
-Tasks                
-Project ownership   
-Task ownership       
-Calendar             
-Dashboard            
-Reports              
-Settings             
-Profile management   
-Password management  
+bcrypt password hashing
 
+User registration
 
-The application is currently in the testing and refinement stage, where the focus is on error handling, edge cases, UI consistency, and general polishing.
+Existing-user login
 
-Future Improvements
+Protected API routes
 
-Potential future enhancements include:
+Project management
 
-Password reset through email
+Task management
+
+User-specific project and task data
+
+Calendar functionality
+
+Dashboard
+
+Reports
+
+Profile management
+
+Account settings
+
+Password management
+
+Render deployment
+
+The production frontend and backend communicate through the configured production API URL.
+
+Known Development Considerations
+The project is still under active development.
+
+Areas that may require further refinement include:
+
+Improved API error handling
+
+More comprehensive automated testing
+
+Improved loading and error states
+
+Production security hardening
+
+API documentation
+
+Password reset/email functionality
 
 Email verification
 
 More advanced reporting
 
-Task categories/tags
+Task categories and tags
 
 Project team members
 
@@ -621,28 +734,90 @@ File attachments
 
 Activity history
 
+Notifications
+
 More advanced calendar functionality
+
+Future Improvements
+Potential future enhancements include:
+
+Password reset through email
+
+Email verification
+
+Two-factor authentication
+
+More advanced reporting
+
+Task categories and tags
+
+Project team members
+
+Task comments
+
+File attachments
+
+Activity history
 
 Notifications
 
-Deployment configuration
+Improved calendar functionality
 
 Automated testing
 
 API documentation
 
+Improved monitoring and logging
+
 Production security hardening
 
-These features are not required for the current core application and can be added incrementally.
+Important Production Notes
+The production database is separate from a developer's local PostgreSQL database.
+
+The production application should always use the production Neon connection through: DATABASE_URL
+
+The frontend should communicate with the production backend through: REACT_APP_API_URL
+The backend should use: JWT_SECRET
+for signing and validating authentication tokens.
+
+These values should be configured through Render's environment-variable settings rather than committed to the repository.
 
 License
+This project is currently a personal/development project.
 
-This project is currently a private/personal project.
-
-Add a license here if the project is later released publicly.
+A formal open-source license can be added if the project is later released under an open-source license.
 
 Author
-
 Fezile Gulwa
+FeyaPlan is a full-stack project and task management application built with:
 
-A full-stack project and task management application built with React, Express, PostgreSQL, and JWT authentication.
+React
+
+Node.js
+
+Express
+
+PostgreSQL
+
+Neon
+
+JWT
+
+bcryptjs
+
+Render
+
+Project Links
+GitHub
+
+https://github.com/fezile-sudo/feya-project
+
+Live Application
+
+https://feyaplan.onrender.com
+
+Production API
+
+https://feyaplan-api.onrender.com
+
+
